@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Bamz.Petshop.Core.ApplicationService
 {
-    interface IPetTypeService
+    public interface IPetTypeService
     {
         /// <summary>
         /// Adds petType to repository.
         /// </summary>
-        /// <param name="petType">Adding petType.</param>
+        /// <param name="type">Adding petType.</param>
         /// <returns></returns>
-        bool Add(PetType petType);
+        PetType Add(string type);
 
         /// <summary>
         /// Gets all petTypes.
@@ -24,15 +24,15 @@ namespace Bamz.Petshop.Core.ApplicationService
         /// Updates PetType already in repository.
         /// </summary>
         /// <param name="index">Index wanted editing.</param>
-        /// <param name="petType">New PetType information.</param>
+        /// <param name="type">New PetType information.</param>
         /// <returns></returns>
-        bool Update(int index, PetType petType);
+        PetType Update(int index, string type);
 
         /// <summary>
         /// Deletes petType in repository.
         /// </summary>
-        /// <param name="petType">PetType wanted deleted.</param>
+        /// <param name="id">Id of PetType wanted deleted.</param>
         /// <returns></returns>
-        bool Delete(PetType petType);
+        PetType Delete(int id);
     }
 }

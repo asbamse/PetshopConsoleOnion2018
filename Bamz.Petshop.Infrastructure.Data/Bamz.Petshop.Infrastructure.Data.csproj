@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bamz.Petshop.Core.DomainService\Bamz.Petshop.Core.DomainService.csproj" />
     <ProjectReference Include="..\Bamz.Petshop.Core.Entity\Bamz.Petshop.Core.Entity.csproj" />
   </ItemGroup>
 

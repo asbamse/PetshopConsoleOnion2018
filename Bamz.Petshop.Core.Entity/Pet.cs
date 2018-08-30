@@ -14,5 +14,17 @@ namespace Bamz.Petshop.Core.Entity
         public PetType Type { get; }
         public Person PreviousOwner { get; }
         public double Price { get; }
+
+        public Pet(int id, string name, DateTime birthDate, DateTime soldDate, Colour colour, PetType type, Person previousOwner, double price)
+        {
+            Id = id;
+            Name = name;
+            BirthDate = birthDate;
+            SoldDate = soldDate;
+            Colour = colour;
+            Type = type;
+            PreviousOwner = previousOwner;
+            Price = price;
+        }
     }
 }

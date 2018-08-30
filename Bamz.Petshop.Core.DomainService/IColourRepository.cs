@@ -10,9 +10,9 @@ namespace Bamz.Petshop.Core.DomainService
         /// <summary>
         /// Adds colour to repository.
         /// </summary>
-        /// <param name="colour">Adding colour.</param>
+        /// <param name="description">Description of colour.</param>
         /// <returns></returns>
-        bool Add(Colour colour);
+        Colour Add(String description);
 
         /// <summary>
         /// Gets all colours.
@@ -24,15 +24,15 @@ namespace Bamz.Petshop.Core.DomainService
         /// Updates Colour already in repository.
         /// </summary>
         /// <param name="index">Index wanted editing.</param>
-        /// <param name="colour">New Colour information.</param>
+        /// <param name="description">Description of colour.</param>
         /// <returns></returns>
-        bool Update(int index, Colour colour);
+        Colour Update(int index, String description);
 
         /// <summary>
         /// Deletes colour in repository.
         /// </summary>
-        /// <param name="colour">Colour wanted deleted.</param>
+        /// <param name="index">Index wanted deleted.</param>
         /// <returns></returns>
-        bool Delete(Colour colour);
+        Colour Delete(int index);
     }
 }

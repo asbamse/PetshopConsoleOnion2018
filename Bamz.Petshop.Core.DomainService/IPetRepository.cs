@@ -10,9 +10,15 @@ namespace Bamz.Petshop.Core.DomainService
         /// <summary>
         /// Adds pet to repository.
         /// </summary>
-        /// <param name="pet">Adding pet.</param>
+        /// <param name="name">Name of pet.</param>
+        /// <param name="birthDate">The pets date of birth.</param>
+        /// <param name="soldDate">The date the pet was sold.</param>
+        /// <param name="colour">Colour of pet.</param>
+        /// <param name="type">Type of pet.</param>
+        /// <param name="previousOwner">Previous owner of the pet.</param>
+        /// <param name="price">Price of pet.</param>
         /// <returns></returns>
-        bool Add(Pet pet);
+        Pet Add(string name, DateTime birthDate, DateTime soldDate, Colour colour, PetType type, Person previousOwner, double price);
 
         /// <summary>
         /// Gets all pets.
@@ -23,16 +29,22 @@ namespace Bamz.Petshop.Core.DomainService
         /// <summary>
         /// Updates Pet already in repository.
         /// </summary>
-        /// <param name="index">Index wanted editing.</param>
-        /// <param name="pet">New Pet information.</param>
+        /// <param name="index">Index of pet wanted editing.</param>
+        /// <param name="name">Name of pet.</param>
+        /// <param name="birthDate">The pets date of birth.</param>
+        /// <param name="soldDate">The date the pet was sold.</param>
+        /// <param name="colour">Colour of pet.</param>
+        /// <param name="type">Type of pet.</param>
+        /// <param name="previousOwner">Previous owner of the pet.</param>
+        /// <param name="price">Price of pet.</param>
         /// <returns></returns>
-        bool Update(int index, Pet pet);
+        Pet Update(int index, string name, DateTime birthDate, DateTime soldDate, Colour colour, PetType type, Person previousOwner, double price);
 
         /// <summary>
         /// Deletes pet in repository.
         /// </summary>
-        /// <param name="pet">Pet wanted deleted.</param>
+        /// <param name="index">Id of Pet wanted deleted.</param>
         /// <returns></returns>
-        bool Delete(Pet pet);
+        Pet Delete(int index);
     }
 }

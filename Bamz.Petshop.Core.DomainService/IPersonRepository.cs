@@ -10,9 +10,13 @@ namespace Bamz.Petshop.Core.DomainService
         /// <summary>
         /// Adds person to repository.
         /// </summary>
-        /// <param name="person">Adding person.</param>
+        /// <param name="firstName">Firstname.</param>
+        /// <param name="lastName">Lastname.</param>
+        /// <param name="address">Address.</param>
+        /// <param name="phone">Phone.</param>
+        /// <param name="email">Email.</param>
         /// <returns></returns>
-        bool Add(Person person);
+        Person Add(string firstName, string lastName, string address, int phone, string email);
 
         /// <summary>
         /// Gets all persons.
@@ -23,16 +27,20 @@ namespace Bamz.Petshop.Core.DomainService
         /// <summary>
         /// Updates Person already in repository.
         /// </summary>
-        /// <param name="index">Index wanted editing.</param>
-        /// <param name="person">New Person information.</param>
+        /// <param name="index">Index of person wanted editing.</param>
+        /// <param name="firstName">Firstname.</param>
+        /// <param name="lastName">Lastname.</param>
+        /// <param name="address">Address.</param>
+        /// <param name="phone">Phone.</param>
+        /// <param name="email">Email.</param>
         /// <returns></returns>
-        bool Update(int index, Person person);
+        Person Update(int index, string firstName, string lastName, string address, int phone, string email);
 
         /// <summary>
         /// Deletes person in repository.
         /// </summary>
-        /// <param name="person">Person wanted deleted.</param>
+        /// <param name="index">Id of Person wanted deleted.</param>
         /// <returns></returns>
-        bool Delete(Person person);
+        Person Delete(int index);
     }
 }

@@ -8,5 +8,11 @@ namespace Bamz.Petshop.Core.Entity
     {
         public int Id { get; }
         public string Type { get; }
+
+        public PetType(int id, string type)
+        {
+            Id = id;
+            Type = type;
+        }
     }
 }

@@ -12,5 +12,15 @@ namespace Bamz.Petshop.Core.Entity
         public string Address { get; }
         public int Phone { get; }
         public string Email { get; }
+
+        public Person(int id, string firstName, string lastName, string address, int phone, string email)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            Phone = phone;
+            Email = email;
+        }
     }
 }
