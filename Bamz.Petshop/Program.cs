@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Bamz.Petshop
 {
@@ -6,7 +7,11 @@ namespace Bamz.Petshop
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CultureInfo MyCultureInfo = new CultureInfo("de-DE");
+            string MyString = "12/06/2008 23:13:42";
+            DateTime MyDateTime = DateTime.Parse(MyString, MyCultureInfo);
+            Console.WriteLine(MyDateTime);
+            Console.ReadLine();
         }
     }
 }
