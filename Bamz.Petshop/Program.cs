@@ -31,21 +31,29 @@ namespace Bamz.Petshop
 
             #region TestData
             IColourService cs = sp.GetRequiredService<IColourService>();
-            cs.Add("Black");
-            cs.Add("Orange");
-            cs.Add("Grey");
-            cs.Add("White");
+            var black = cs.Add("Black");
+            var mortisCol = cs.Add("Orange");
+            var grey = cs.Add("Grey");
+            var white = cs.Add("White");
 
-            IPetTypeRepository pts = sp.GetRequiredService<IPetTypeRepository>();
-            pts.Add("Dog");
-            pts.Add("Cat");
-            pts.Add("Goat");
-            pts.Add("Dreadnaught");
+            IPetTypeService pts = sp.GetRequiredService<IPetTypeService>();
+            var dog = pts.Add("Dog");
+            var cat = pts.Add("Cat");
+            var goat = pts.Add("Goat");
+            var mortisType = pts.Add("Dreadnought");
 
-            IPersonRepository pss = sp.GetRequiredService<IPersonRepository>();
-            pss.Add("Jens", "Jensen", "Jensvej", 536736, "jens@jensen.dk");
-            pss.Add("John", "Smith", "Global Avenue", 66666666, "seeya@my.crib");
-            pss.Add("Wonda Bonda", "Sonda", "Vegetable Street", 432589, "wbs@onda.co.uk");
+            IPersonService pss = sp.GetRequiredService<IPersonService>();
+            var mortisOwner = pss.Add("Jens", "Jensen", "Jensvej 5", 536736, "jens@jensen.dk");
+            var r1Owner = pss.Add("John", "Smith", "Global Avenue 66", 66666666, "seeya@my.crib");
+            var r2Owner = pss.Add("Wonda Bonda", "Sonda", "Vegetable Street 49", 432589, "wbs@onda.co.uk");
+
+            IPetService ps = sp.GetRequiredService<IPetService>();
+            ps.Add("Mortis", new DateTime(), DateTime.Now, mortisCol, mortisType, mortisOwner, 12000000.0);
+            ps.Add("Jaga", new DateTime(), DateTime.Now, grey, dog, r1Owner, 10.0);
+            ps.Add("Macauley", new DateTime(), DateTime.Now, black, cat, r1Owner, 1300.0);
+            ps.Add("Leray", new DateTime(), DateTime.Now, grey, cat, r1Owner, 533);
+            ps.Add("Guy", new DateTime(), DateTime.Now, white, dog, r2Owner, 153.53);
+            ps.Add("Fabia", new DateTime(), DateTime.Now, white, goat, r2Owner, 99333);
             #endregion
 
             // Gets generated User Interface to run Show() Method.

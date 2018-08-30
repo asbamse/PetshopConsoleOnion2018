@@ -95,16 +95,16 @@ namespace Bamz.Petshop.Core.ApplicationService.Services
             }
         }
 
-        public List<Pet> SearchByType(string search)
+        public List<Pet> SearchByType(PetType petType)
         {
             try
             {
-                List<Pet> result = _prep.GetAll().Where(pet => pet.Type.Type.ToLower().Equals(search.ToLower())).ToList();
+                List<Pet> result = _prep.GetAll().Where(pet => pet.Type.Equals(petType)).ToList();
                 return result;
             }
             catch (Exception e)
             {
-                throw new ServiceException("Error getting pet by id: " + e.Message, e);
+                throw new ServiceException("Error getting pet by type: " + e.Message, e);
             }
         }
 

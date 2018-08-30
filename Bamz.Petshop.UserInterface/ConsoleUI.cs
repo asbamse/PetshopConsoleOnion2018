@@ -14,11 +14,12 @@ namespace Bamz.Petshop.UserInterface
         private readonly IPetService _petServ;
         private readonly IPetTypeService _ptServ;
 
-        private readonly Menu main = new Menu("Main Menu");
-        private readonly Menu colourMenu = new Menu("Colour Menu");
-        private readonly Menu personMenu = new Menu("Person Menu");
-        private readonly Menu petMenu = new Menu("Pet Menu");
-        private readonly Menu petTypeMenu = new Menu("Pet Type Menu");
+        private readonly Menu main;
+        private readonly Menu colourMenu;
+        private readonly Menu personMenu;
+        private readonly Menu petMenu;
+        private readonly Menu petTypeMenu;
+        private readonly Menu petReadMenu;
 
         public ConsoleUI(IColourService colourService, IPersonService personService, IPetService petService, IPetTypeService petTypeService)
         {
@@ -32,7 +33,7 @@ namespace Bamz.Petshop.UserInterface
             personMenu = new Menu("Person Menu", main);
             petMenu = new Menu("Pet Menu", main);
             petTypeMenu = new Menu("Pet Type Menu", main);
-
+            petReadMenu = new Menu("Pet Read Menu", petMenu);
 
             #region Main
             main.SetMenu(
@@ -252,27 +253,10 @@ namespace Bamz.Petshop.UserInterface
                             Console.WriteLine(e.Message);
                         }
                     }),
-                    new MenuItem("Read All", () =>
+                    new MenuItem("Read", () =>
                     {
-                        try
-                        {
-                            List<Pet> pets = _petServ.GetAll();
-                            if(pets.Count > 0)
-                            {
-                                foreach (Pet pet in pets)
-                                {
-                                    Console.WriteLine("ID: {0}, Name: {1}, Birth Date: {2}, Sold Date: {3}, Colour: {4}, Pet Type: {5}, Previous Owner: {6} {7}, Price {8}.", pet.Id, pet.Name, pet.BirthDate, pet.SoldDate, pet.Colour.Description, pet.Type.Type, pet.PreviousOwner.FirstName, pet.PreviousOwner.LastName, pet.Price);
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("There are no pets stored.");
-                            }
-                        }
-                        catch(Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                        Console.Clear();
+                        petReadMenu.Show();
                     }),
                     new MenuItem("Update", () =>
                     {
@@ -393,6 +377,127 @@ namespace Bamz.Petshop.UserInterface
                         {
                             PetType petType = _ptServ.Delete(index);
                             Console.WriteLine("Successfully deleted {0} from the repository!", petType.Type);
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    })
+                });
+            #endregion
+
+            #region Pet Read
+            petReadMenu.SetMenu(
+                new MenuItem[] {
+                    new MenuItem("Read All", () =>
+                    {
+                        try
+                        {
+                            List<Pet> pets = _petServ.GetAll();
+                            if(pets.Count > 0)
+                            {
+                                foreach (Pet pet in pets)
+                                {
+                                    Console.WriteLine("ID: {0}, Name: {1}, Birth Date: {2}, Sold Date: {3}, Colour: {4}, Pet Type: {5}, Previous Owner: {6} {7}, Price {8}.", pet.Id, pet.Name, pet.BirthDate, pet.SoldDate, pet.Colour.Description, pet.Type.Type, pet.PreviousOwner.FirstName, pet.PreviousOwner.LastName, pet.Price);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("There are no pets stored.");
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }),
+                    new MenuItem("Read By ID", () =>
+                    {
+                        int index = ConsoleUtils.ReadInt("Input pet id: ");
+                        try
+                        {
+                            Pet pet = _petServ.GetById(index);
+                            if(pet != null)
+                            {
+                                Console.WriteLine("ID: {0}, Name: {1}, Birth Date: {2}, Sold Date: {3}, Colour: {4}, Pet Type: {5}, Previous Owner: {6} {7}, Price {8}.", pet.Id, pet.Name, pet.BirthDate, pet.SoldDate, pet.Colour.Description, pet.Type.Type, pet.PreviousOwner.FirstName, pet.PreviousOwner.LastName, pet.Price);
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID was not found in repository.");
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }),
+                    new MenuItem("Read All Ordered By Price Ascending", () =>
+                    {
+                        try
+                        {
+                            List<Pet> pets = _petServ.GetAllOrderPrice();
+                            if(pets.Count > 0)
+                            {
+                                foreach (Pet pet in pets)
+                                {
+                                    Console.WriteLine("ID: {0}, Name: {1}, Birth Date: {2}, Sold Date: {3}, Colour: {4}, Pet Type: {5}, Previous Owner: {6} {7}, Price {8}.", pet.Id, pet.Name, pet.BirthDate, pet.SoldDate, pet.Colour.Description, pet.Type.Type, pet.PreviousOwner.FirstName, pet.PreviousOwner.LastName, pet.Price);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("There are no pets stored.");
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }),
+                    new MenuItem("Read Five Cheapest", () =>
+                    {
+                        try
+                        {
+                            List<Pet> pets = _petServ.GetFiveCheapest();
+                            if(pets.Count > 0)
+                            {
+                                foreach (Pet pet in pets)
+                                {
+                                    Console.WriteLine("ID: {0}, Name: {1}, Birth Date: {2}, Sold Date: {3}, Colour: {4}, Pet Type: {5}, Previous Owner: {6} {7}, Price {8}.", pet.Id, pet.Name, pet.BirthDate, pet.SoldDate, pet.Colour.Description, pet.Type.Type, pet.PreviousOwner.FirstName, pet.PreviousOwner.LastName, pet.Price);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("There are no pets stored.");
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }),
+                    new MenuItem("Read By Type", () =>
+                    {
+                        PetType type = ChoosePetType(petMenu);
+                        if(type==null)
+                        {
+                            Console.WriteLine("No pet types found! Create the pet type before searching.");
+                            return;
+                        }
+
+                        try
+                        {
+                            List<Pet> pets = _petServ.SearchByType(type);
+                            if(pets.Count > 0)
+                            {
+                                foreach (Pet pet in pets)
+                                {
+                                    Console.WriteLine("ID: {0}, Name: {1}, Birth Date: {2}, Sold Date: {3}, Colour: {4}, Pet Type: {5}, Previous Owner: {6} {7}, Price {8}.", pet.Id, pet.Name, pet.BirthDate, pet.SoldDate, pet.Colour.Description, pet.Type.Type, pet.PreviousOwner.FirstName, pet.PreviousOwner.LastName, pet.Price);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("There are no pets of this type.");
+                            }
                         }
                         catch(Exception e)
                         {

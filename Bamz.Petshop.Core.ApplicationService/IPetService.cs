@@ -48,9 +48,9 @@ namespace Bamz.Petshop.Core.ApplicationService
         /// <summary>
         /// Search for all pets of given type.
         /// </summary>
-        /// <param name="search">The type wanted.</param>
+        /// <param name="petType">The type wanted.</param>
         /// <returns>A list of pets of given type.</returns>
-        List<Pet> SearchByType(string search);
+        List<Pet> SearchByType(PetType petType);
 
         /// <summary>
         /// Updates Pet already in repository.
