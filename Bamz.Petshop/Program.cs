@@ -26,10 +26,12 @@ namespace Bamz.Petshop
             sc.AddScoped<IPetRepository, PetRepository>();
             sc.AddScoped<IPetTypeRepository, PetTypeRepository>();
             sc.AddScoped<IUserInterface, ConsoleUI>();
+
             // Build Service.
             ServiceProvider sp = sc.BuildServiceProvider();
 
             #region TestData
+            
             IColourService cs = sp.GetRequiredService<IColourService>();
             var black = cs.Add("Black");
             var mortisCol = cs.Add("Orange");
@@ -54,6 +56,7 @@ namespace Bamz.Petshop
             ps.Add("Leray", new DateTime(), DateTime.Now, grey, cat, r1Owner, 533);
             ps.Add("Guy", new DateTime(), DateTime.Now, white, dog, r2Owner, 153.53);
             ps.Add("Fabia", new DateTime(), DateTime.Now, white, goat, r2Owner, 99333);
+            
             #endregion
 
             // Gets generated User Interface to run Show() Method.
